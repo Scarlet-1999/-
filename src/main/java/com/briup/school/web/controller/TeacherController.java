@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +35,43 @@ public class TeacherController  {
     public Message findByNameGender(String key,String word){
         List<Teacher> list=teacherService.findByNameGenden(key,word);
         return MessageUtil.success(list);
+    }
+
+
+    @GetMapping("/deleteByid")
+    @ApiOperation("通过id删除")
+    public Message deleteByid(int id){
+        teacherService.deleteByid(id);
+        return MessageUtil.success();
+    }
+
+    @GetMapping("/deleteByids")
+    @ApiOperation("批量删除")
+    public Message deleteByids(List<Integer> list){
+
+
+        teacherService.delelteByids(list);
+        return MessageUtil.success();
+    }
+
+
+    @PostMapping("/add")
+    @ApiOperation("添加教师")
+    public Message add(Teacher teacher){
+        teacherService.addOrUpdate(teacher);
+        return MessageUtil.success();
+    }
+
+
+    @PostMapping("/update")
+    @ApiOperation("修改教师")
+    public Message update(Teacher teacher){
+
+        teacherService.addOrUpdate(teacher);
+
+        return MessageUtil.success();
+
+
     }
 
 
