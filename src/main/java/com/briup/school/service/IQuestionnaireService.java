@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IQuestionnaireService {
 List<Questionnaire> findAll() throws RuntimeException;
+    List<Questionnaire> selectByName(String name,String description) throws  RuntimeException;
 }

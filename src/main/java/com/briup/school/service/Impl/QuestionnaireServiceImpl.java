@@ -20,4 +20,24 @@ public class QuestionnaireServiceImpl implements IQuestionnaireService {
                 questionnaireMapper.selectByExample(questionnaireExample);
         return questionnaires;
     }
+
+    @Override
+    public List<Questionnaire> selectByName(String name,String description) throws RuntimeException {
+        if (name==null){
+            name="";
+        }
+        if ((name==null||"".equals(name))&&(description==null||"".equals(description))){
+            QuestionnaireExample questionnaireExample=new QuestionnaireExample();
+            List<Questionnaire> questionnaireList=
+                    questionnaireMapper.selectByExample(questionnaireExample);
+            return questionnaireList;
+        }
+        if (description==null){
+
+        }
+
+
+
+        return null;
+    }
 }
