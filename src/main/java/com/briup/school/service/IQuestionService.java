@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface IQuestionService {
     List<Question> selectAll() throws  RuntimeException;
+
+    void add(Question question) throws RuntimeException;
+
+
 }

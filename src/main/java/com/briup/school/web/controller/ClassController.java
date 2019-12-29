@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "class")
+@RequestMapping( "/class")
 @Api(description = "班级管理")
 public class ClassController {
 

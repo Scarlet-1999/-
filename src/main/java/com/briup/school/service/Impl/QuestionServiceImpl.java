@@ -18,4 +18,10 @@ public class QuestionServiceImpl implements IQuestionService {
         QuestionExample questionExample = new QuestionExample();
         return questionMapper.selectByExample(questionExample);
     }
+
+    @Override
+    public void add(Question question) throws RuntimeException {
+        questionMapper.insert(question);
+
+    }
 }
