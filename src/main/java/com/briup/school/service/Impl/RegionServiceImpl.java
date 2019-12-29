@@ -21,7 +21,31 @@ public class RegionServiceImpl  implements IRegionService {
         return regions;
     }
 
+    @Override
 
+    public void saveOrUpdate(Region region) throws RuntimeException {
+        if (region == null) {
+            throw new RuntimeException("参数为空");
+        }
+
+        if (region.getId() == null) {
+            regionMapper.insert(region);
+        } else {
+            regionMapper.updateByPrimaryKey(region);
+        }
+    }
+
+    @Override
+    public void deleteById(int id) throws RuntimeException {
+     regionMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Region selectById(int id) throws RuntimeException {
+        Region region=new Region();
+
+        return region;
+    }
 
 
 }
