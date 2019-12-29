@@ -65,6 +65,16 @@ public class ClassController {
         return MessageUtil.success(classService.search(key,word));
     }
 
+    @GetMapping("/deleteBatch")
+    @ApiOperation(value = "批量删除")
+    //参数不用List集合，否则需传入json数据
+    public Message deleteBatch(int[] ids){
+        for(int id:ids){
+            classService.deleteById(id);
+        }
+        return MessageUtil.success();
+    }
+
 
 
 

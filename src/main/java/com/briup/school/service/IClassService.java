@@ -11,5 +11,4 @@ public interface IClassService {
     void deleteById(int id)throws RuntimeException;
     void addOrUpadate(Class cla)throws RuntimeException;
     List<ClassEx> search(String key,String word) throws RuntimeException;
-
 }
