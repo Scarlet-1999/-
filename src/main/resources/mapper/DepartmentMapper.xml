@@ -241,6 +241,8 @@
   </resultMap>
   <select id="FindByCondition" resultMap="abn">
     select * from briup_department where name like "%"#{key}"%"
+    or id like "%"#{key}"%"
+    or description like "%"#{key}"%"
   </select>
   
 </mapper>
