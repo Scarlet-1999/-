@@ -29,6 +29,13 @@ public class TeacherController  {
         return MessageUtil.success(list);
     }
 
+    @GetMapping("/findByNameGender")
+    @ApiOperation("通过姓名或性别查询")
+    public Message findByNameGender(String key,String word){
+        List<Teacher> list=teacherService.findByNameGenden(key,word);
+        return MessageUtil.success(list);
+    }
+
 
 
 }

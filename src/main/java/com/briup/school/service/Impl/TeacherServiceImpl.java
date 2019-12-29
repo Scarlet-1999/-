@@ -24,4 +24,33 @@ public class TeacherServiceImpl implements ITeacherService {
         List<Teacher> list=teacherMapper.selectByExample(example);
         return list;
     }
+
+    @Override
+    public List<Teacher> findByNameGenden(String key, String word) {
+        if ((key==null||"".equals(key))&&(word==null||"".equals(word))){
+            TeacherExample example=new TeacherExample();
+            List<Teacher> list=teacherMapper.selectByExample(example);
+            return list;
+        }if((key==null||"".equals(key))&&!(word==null||"".equals(word))){
+            TeacherExample example=new TeacherExample();
+            example.createCriteria().andGenderEqualTo(word);
+            example.or().andNameEqualTo(word);
+            return teacherMapper.selectByExample(example);
+
+        }if (key=="name"){
+            TeacherExample example=new TeacherExample();
+
+            example.createCriteria().andNameEqualTo(word);
+            return teacherMapper.selectByExample(example);
+
+        }if (key=="gender"){
+            TeacherExample example=new TeacherExample();
+            example.createCriteria().andGenderEqualTo(word);
+
+            return teacherMapper.selectByExample(example);
+
+        }
+
+        return null;
+    }
 }
