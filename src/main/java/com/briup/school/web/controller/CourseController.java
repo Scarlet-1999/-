@@ -51,4 +51,18 @@ public class CourseController {
         return MessageUtil.success("修改成功");
     }
 
+    @GetMapping("/seletByKW")
+    public Message  selectsomeing (String key ,String word){
+
+        List<Course> courses=courseService.selectByKW(key,word);
+        return MessageUtil.success(courses);
+    }
+
+    @GetMapping("/deleteBatch")
+public  Message deleteBatch(int[] ids){//也可以用String类型
+
+        for (int id : ids)
+        courseService.deleteById(id);
+        return MessageUtil.success("删除成功");
+}
 }

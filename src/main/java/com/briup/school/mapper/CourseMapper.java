@@ -27,4 +27,11 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+
+    List<Course> selectIdOrName(String word);
+
+    List<Course> selectId(String word);
+
+    List<Course> selectName(String word);
 }

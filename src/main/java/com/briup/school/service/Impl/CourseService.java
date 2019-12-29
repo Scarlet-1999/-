@@ -41,5 +41,29 @@ private CourseMapper courseMapper;
 
     }
 
+    @Override
+    public List<Course> selectByKW(String key, String word) throws RuntimeException {
+        word = word == null ? "" : word;
+        if ((key == null || "".equals(key) ) && (word == null || "".equals(word))){
+            return selectAll();
+        }
+        // key 为空    word不为空 表示 下拉框没有选择，后面的输入框有内容
+         else if((key == null || "".equals(key)) && !"".equals(word) ) {
+            word = "%" + word  + "%";
+            return  courseMapper.selectIdOrName(word);
+
+            // 下拉框选择了标题就根据标题查询
+        } else if ("id".equals(key)) {
+            word = "%" + word  + "%";
+            return courseMapper.selectId(word);
+
+            // 下拉框选择了作者就根据作者查询
+        } else if("name".equals(key)) {
+            word = "%" + word  + "%";
+            return  courseMapper.selectName(word);
+        }
+        return null;
+    }
+
 
 }

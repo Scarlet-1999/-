@@ -193,4 +193,21 @@
       period = #{period,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="selectIdOrName" resultMap="BaseResultMap">
+        select * from briup_course where id like #{word} or name like #{word}
+
+    </select>
+
+  <select id="selectId" resultMap="BaseResultMap">
+        select * from briup_course where id like #{word}
+    </select>
+
+
+  <select id="selectName" resultMap="BaseResultMap">
+        select * from briup_course where name like #{word}
+    </select>
+
 </mapper>

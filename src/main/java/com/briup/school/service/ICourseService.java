@@ -9,4 +9,5 @@ public interface ICourseService {
     void deleteById(int id) throws  RuntimeException;
     void saveOrUpdate(Course course) throws  RuntimeException;
     void batchDelete(List<Course> courses)throws  RuntimeException;
+    List<Course>  selectByKW(String key ,String word) throws  RuntimeException;
 }
