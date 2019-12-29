@@ -9,5 +9,7 @@ public interface IQuestionService {
 
     void add(Question question) throws RuntimeException;
 
+    Question selectAll() throws  RuntimeException;
+
 
 }

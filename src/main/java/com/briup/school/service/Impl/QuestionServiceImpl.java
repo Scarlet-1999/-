@@ -22,6 +22,5 @@ public class QuestionServiceImpl implements IQuestionService {
     @Override
     public void add(Question question) throws RuntimeException {
         questionMapper.insert(question);
-
     }
 }
