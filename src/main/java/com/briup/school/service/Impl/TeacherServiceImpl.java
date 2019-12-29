@@ -72,9 +72,9 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public void delelteByids(List<Integer> list) throws RuntimeException {
+    public void delelteByids(int[] ids) throws RuntimeException {
 
-        for (int id:list){
+        for (int id:ids){
             teacherMapper.deleteByPrimaryKey(id);
 
         }

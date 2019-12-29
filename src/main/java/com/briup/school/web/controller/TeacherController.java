@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/teacher")
-@Api(description = "教师管理器")
+@Api(description = "教师管理")
 public class TeacherController  {
     @Autowired
     private ITeacherService teacherService;
@@ -47,10 +47,10 @@ public class TeacherController  {
 
     @GetMapping("/deleteByids")
     @ApiOperation("批量删除")
-    public Message deleteByids(List<Integer> list){
+    public Message deleteByids(int[] ids){
 
 
-        teacherService.delelteByids(list);
+        teacherService.delelteByids(ids);
         return MessageUtil.success();
     }
 
