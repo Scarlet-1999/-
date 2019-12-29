@@ -231,4 +231,16 @@
       region_id = #{regionId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+<!-- 自定义方法  -->
+  <resultMap id="abn" type="com.briup.school.bean.Department">
+    <id column="id" property="id"></id>
+    <result column="name" property="name"></result>
+    <result column="description" property="description"></result>
+    <result column="region_id" property="regionId"></result>
+  </resultMap>
+  <select id="FindByCondition" resultMap="abn">
+    select * from briup_department where name like "%"#{key}"%"
+  </select>
+  
 </mapper>
