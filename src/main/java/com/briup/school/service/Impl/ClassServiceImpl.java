@@ -19,7 +19,6 @@ public class ClassServiceImpl implements IClassService {
     @Autowired
     private ClassMapper classMapper;
 
-
     @Override
     public List<ClassEx> selectAll() throws RuntimeException {
         return classEXMapper.selectAll();
@@ -29,7 +28,6 @@ public class ClassServiceImpl implements IClassService {
     public Class selectById(int id) throws RuntimeException {
         return classMapper.selectByPrimaryKey(id);
     }
-
 
     @Override
     public void deleteById(int id) throws RuntimeException {
