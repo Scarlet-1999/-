@@ -23,11 +23,7 @@
         select * from briup_options where question_id = #{id}
     </select>
 
-    <select id="selectLastOne" resultType="com.briup.school.mapper.QuestionMapper">
-        select top 1 * from briup_question by order desc
-    </select>
-
-    <insert id="insert" >
+    <insert id="insertQuestion" >
         <selectKey keyColumn="id" keyProperty="id" order="AFTER" resultType="int">
             select LAST_INSERT_ID()
         </selectKey>

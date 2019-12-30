@@ -31,12 +31,10 @@ public class QuestionServiceImpl implements IQuestionService {
     @Override
     public void addOrUpdate(Question question,List<Options> options) throws RuntimeException {
         if(question.getId() == null){
-            questionMapper.insert(question);
+            questionEXMapper.insertQuestion(question);
             if (options != null){
                 for (Options option:options){
-                    option.setQuestionId(
-                            //查询最后一条题库数据，即刚插入的
-                            questionEXMapper.selectLastOne().getId());
+                    option.setQuestionId(question.getId());
                     optionsMapper.insert(option);
                 }
             }
@@ -47,9 +45,6 @@ public class QuestionServiceImpl implements IQuestionService {
                     optionsMapper.deleteByPrimaryKey(option.getId());
                 }
             }
-//            OptionsExample optionsExample = new OptionsExample();
-//            optionsExample.createCriteria().andQuestionIdEqualTo();
-//            optionsMapper.updateByExample(optionsExample);
         }
     }
 

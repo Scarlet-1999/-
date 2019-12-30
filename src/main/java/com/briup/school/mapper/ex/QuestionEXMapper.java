@@ -1,5 +1,6 @@
 package com.briup.school.mapper.ex;
 
+import com.briup.school.bean.Options;
 import com.briup.school.bean.Question;
 import com.briup.school.bean.ex.QuestionEX;
 
@@ -11,7 +12,6 @@ public interface QuestionEXMapper {
 
     List<QuestionEX> selectByName(String word) throws RuntimeException;
 
-    void insert(QuestionEX questionEX) throws RuntimeException;
+    void insertQuestion(Question question) throws RuntimeException;
 
-    Question selectLastOne() throws RuntimeException;
 }
