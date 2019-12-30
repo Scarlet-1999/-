@@ -1,13 +1,18 @@
 package com.briup.school.bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@ApiModel
 public class Questionnaire implements Serializable {
     private Integer id;
 
     private String name;
 
+    @ApiModelProperty(hidden = true)
     private Date date;
 
     private String description;

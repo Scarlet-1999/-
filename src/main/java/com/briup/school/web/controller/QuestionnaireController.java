@@ -1,12 +1,16 @@
 package com.briup.school.web.controller;
 
 import com.briup.school.bean.Questionnaire;
+import com.briup.school.bean.ex.QuestionEX;
 import com.briup.school.service.IQuestionnaireService;
 import com.briup.school.util.Message;
 import com.briup.school.util.MessageUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,9 +22,62 @@ import java.util.List;
 public class QuestionnaireController {
     @Autowired
     private IQuestionnaireService questionnaireService;
-    @GetMapping
+
+    @GetMapping("/selectAll")
+    @ApiOperation("显示所有问卷")
     public  Message selectAll(){
         List<Questionnaire> questionnaires=questionnaireService.findAll();
         return MessageUtil.success(questionnaires);
     }
+
+
+    @GetMapping("/deleteByid")
+    @ApiOperation("通过id删除")
+    @ApiImplicitParam(name = "id",value = "id",paramType = "query",dataType = "int",required = true)
+    public Message deleteByid(int id){
+        questionnaireService.deleteByid(id);
+        return MessageUtil.success();
+    }
+
+    @GetMapping("/findByid")
+    @ApiOperation("通过id查询")
+    public Message findByid(int id){
+        Questionnaire questionnaire=questionnaireService.findByid(id);
+
+        return MessageUtil.success(questionnaire);
+    }
+
+    @GetMapping("/deletesome")
+    @ApiOperation("批量删除")
+
+    public Message deletesome(int[] ids){
+        questionnaireService.deletesome(ids);
+        return MessageUtil.success();
+    }
+
+    @PostMapping("/add")
+    @ApiOperation("添加问卷")
+    public Message add(Questionnaire questionnaire,int [] Qids){
+        questionnaireService.addOrUpdate(questionnaire,Qids);
+        return MessageUtil.success();
+    }
+
+
+    @PostMapping("/update")
+    @ApiOperation("修改问卷")
+    public Message update(Questionnaire questionnaire,int[] Qids){
+        questionnaireService.addOrUpdate(questionnaire,Qids);
+        return MessageUtil.success();
+    }
+
+    @GetMapping("/seeQuestionByid")
+    @ApiOperation("预览")
+    public Message seeQuestionByid(int id){
+        List<QuestionEX> list=questionnaireService.seeQuestionByid(id);
+        return MessageUtil.success(list);
+    }
+
+
+
+
 }

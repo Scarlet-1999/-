@@ -29,4 +29,9 @@
         </selectKey>
         insert into briup_question values (#{id},#{name},#{type})
     </insert>
+
+    <select id="selectById" resultMap="123">
+        select * from briup_question where id=#{id}
+    </select>
+
 </mapper>
