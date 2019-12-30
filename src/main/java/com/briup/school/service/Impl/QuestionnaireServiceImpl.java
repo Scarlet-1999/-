@@ -39,31 +39,22 @@ public class QuestionnaireServiceImpl implements IQuestionnaireService {
         return questionnaire;
     }
 
+
     @Override
-    public List<Questionnaire> selectByName(String name,String description) throws RuntimeException {
+    public List<Questionnaire> selectByName(String name) throws RuntimeException {
         if (name==null){
             name="";
         }
-        if ((name==null||"".equals(name))&&(description==null||"".equals(description))){
-            QuestionnaireExample questionnaireExample=new QuestionnaireExample();
-            List<Questionnaire> questionnaireList=
-                    questionnaireMapper.selectByExample(questionnaireExample);
-            return questionnaireList;
-        }
-        if (description==null){
+        name="%"+name+"%";
+        QuestionnaireExample example=new QuestionnaireExample();
+        example.createCriteria().andNameLike(name);
+        List<Questionnaire> list=questionnaireMapper.selectByExample(example);
 
 
 
 
 
-
-
-
-        }
-
-
-
-        return null;
+        return list;
     }
 
     @Override

@@ -8,13 +8,16 @@ import java.util.Date;
 
 @ApiModel
 public class Questionnaire implements Serializable {
+    @ApiModelProperty(value = "id")
     private Integer id;
 
+    @ApiModelProperty(value = "姓名")
     private String name;
 
     @ApiModelProperty(hidden = true)
     private Date date;
 
+    @ApiModelProperty(value = "问卷描述")
     private String description;
 
     private static final long serialVersionUID = 1L;

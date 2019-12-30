@@ -41,6 +41,7 @@ public class QuestionnaireController {
 
     @GetMapping("/findByid")
     @ApiOperation("通过id查询")
+    @ApiImplicitParam(name = "id",value = "id",paramType = "query",dataType = "int",required = true)
     public Message findByid(int id){
         Questionnaire questionnaire=questionnaireService.findByid(id);
 
@@ -49,7 +50,7 @@ public class QuestionnaireController {
 
     @GetMapping("/deletesome")
     @ApiOperation("批量删除")
-
+    @ApiImplicitParam(name = "ids",value = "需要删除的id",paramType = "query",required = true,dataType = "int",allowMultiple = true)
     public Message deletesome(int[] ids){
         questionnaireService.deletesome(ids);
         return MessageUtil.success();
@@ -57,6 +58,7 @@ public class QuestionnaireController {
 
     @PostMapping("/add")
     @ApiOperation("添加问卷")
+    @ApiImplicitParam(name = "Qids",value = "需要添加的题目id",paramType = "query",dataType = "int",allowMultiple = true)
     public Message add(Questionnaire questionnaire,int [] Qids){
         questionnaireService.addOrUpdate(questionnaire,Qids);
         return MessageUtil.success();
@@ -65,6 +67,7 @@ public class QuestionnaireController {
 
     @PostMapping("/update")
     @ApiOperation("修改问卷")
+    @ApiImplicitParam(name = "Qids",value = "修改后的题目id",paramType = "query",dataType = "int",allowMultiple = true)
     public Message update(Questionnaire questionnaire,int[] Qids){
         questionnaireService.addOrUpdate(questionnaire,Qids);
         return MessageUtil.success();
@@ -72,8 +75,18 @@ public class QuestionnaireController {
 
     @GetMapping("/seeQuestionByid")
     @ApiOperation("预览")
+    @ApiImplicitParam(name = "id",value = "id",paramType = "query",dataType = "int",required = true)
     public Message seeQuestionByid(int id){
         List<QuestionEX> list=questionnaireService.seeQuestionByid(id);
+        return MessageUtil.success(list);
+    }
+
+
+    @GetMapping("/selectByName")
+    @ApiOperation("通过问卷名字查询")
+    @ApiImplicitParam(name = "name",value = "姓名",paramType = "query",dataType = "String",required = true)
+    public Message selectByName(String name){
+        List<Questionnaire> list=questionnaireService.selectByName(name);
         return MessageUtil.success(list);
     }
 
