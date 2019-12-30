@@ -122,7 +122,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.briup.school.bean.Questionnaire">
-    insert into briup_questionnaire (id, name, date, 
+    <selectKey keyProperty="id" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into briup_questionnaire (id, name, date,
       description)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
       #{description,jdbcType=LONGVARCHAR})
