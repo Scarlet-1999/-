@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.briup.school.mapper.ex.QuestionEXMapper">
-    <resultMap id="123" type="com.briup.school.bean.Options">
+    <resultMap id="123" type="com.briup.school.bean.ex.QuestionEX">
         <id column="id" property="id"></id>
-        <result column="name" property="id"></result>
+        <result column="name" property="name"></result>
         <result column="type" property="type"></result>
-        <collection property=""
+        <collection property="options"
+                    column="id"
+                    select="selectOption"
+                    ofType="com.briup.school.bean.Options">
+        </collection>
     </resultMap>
     <select id="selectAll" resultMap="123">
         select * from briup_question
     </select>
+
+    <select id="selectByName" resultMap="123">
+        select * from briup_question where name like #{word}
+    </select>
+
+    <select id="selectOption" resultType="com.briup.school.bean.Options">
+        select * from briup_options where question_id = #{id}
+    </select>
+
+    <select id="selectLastOne" resultType="com.briup.school.mapper.QuestionMapper">
+        select top 1 * from briup_question by order desc
+    </select>
+
+    <insert id="insert" >
+        <selectKey keyColumn="id" keyProperty="id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into briup_question values (#{id},#{name},#{type})
+    </insert>
 </mapper>

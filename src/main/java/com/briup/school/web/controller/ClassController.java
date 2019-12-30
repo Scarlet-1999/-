@@ -43,8 +43,6 @@ public class ClassController {
         return MessageUtil.success();
     }
 
-
-
     @PostMapping("/add")
     @ApiOperation(value = "添加班级")
     public Message add(Class cla) {
@@ -60,8 +58,8 @@ public class ClassController {
     }
 
     @GetMapping("/search")
-    @ApiOperation(value = "更新班级")
-    public Message search(String key,String word){
+    @ApiOperation(value = "搜索")
+    public Message search(String key,String word) {
         return MessageUtil.success(classService.search(key,word));
     }
 
