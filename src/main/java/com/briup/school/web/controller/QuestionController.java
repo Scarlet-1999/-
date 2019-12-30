@@ -54,6 +54,7 @@ public class QuestionController {
 
     @PostMapping("/update")
     @ApiOperation(value = "修改题目")
+    //@RequestBody将请求体里的json数据转为List集合里的数据
     public Message update(Question question,@RequestBody List<Options> options){
         questionService.addOrUpdate(question,options);
         return MessageUtil.success();

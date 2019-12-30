@@ -14,7 +14,5 @@ public interface QuestionEXMapper {
 
     void insertQuestion(Question question) throws RuntimeException;
 
-    Question selectLastOne() throws RuntimeException;
-
     QuestionEX selectById(int id) throws RuntimeException;
 }
