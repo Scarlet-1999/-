@@ -1,7 +1,6 @@
 package com.briup.school.web.controller;
 
 import com.briup.school.bean.Class;
-import com.briup.school.bean.ex.ClassEx;
 import com.briup.school.service.IClassService;
 import com.briup.school.util.Message;
 import com.briup.school.util.MessageUtil;
@@ -26,8 +25,8 @@ public class ClassController {
     @GetMapping("/selectAll")
     @ApiOperation(value = "查询全部班级")
     public Message selectAll(){
-        List<ClassEx> classExes = classService.selectAll();
-        return MessageUtil.success(classExes);
+        List<Class> classes = classService.selectAll();
+        return MessageUtil.success(classes);
     }
 
     @GetMapping("/selectById")
