@@ -19,4 +19,41 @@ public class AllSurveyServiceImpl implements IAllSurveyService {
         List<SurveyEX> list=allSurveyEXMapper.FindAll();
         return list;
     }
+
+    @Override
+    public List<SurveyEX> findByClassName(String ClassName) throws RuntimeException {
+        List<SurveyEX> list=allSurveyEXMapper.findByClassName(ClassName);
+        return list;
+    }
+
+    @Override
+    public List<SurveyEX> findByAll(String Dname, String Clname, String Coname, String Qname,String word) throws RuntimeException {
+        if (Dname==null||"".equals(Dname)){
+            Dname="%%";
+        }
+
+        if (Clname==null||"".equals(Clname)){
+            Clname="%%";
+        }
+
+        if (Coname==null||"".equals(Coname)){
+            Coname="%%";
+        }
+
+        if (Qname==null||"".equals(Qname)){
+            Qname="%%";
+        }
+
+
+        if (word==null){
+            word="";
+        }
+
+
+        word="%"+word+"%";
+        System.out.println(word);
+        List<SurveyEX> list=allSurveyEXMapper.findByAll(Dname,Clname,Coname,Qname,word);
+
+        return list;
+    }
 }

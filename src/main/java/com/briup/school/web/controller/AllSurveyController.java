@@ -5,6 +5,8 @@ import com.briup.school.service.IAllSurveyService;
 import com.briup.school.util.Message;
 import com.briup.school.util.MessageUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,4 +30,27 @@ public class AllSurveyController {
 
         return MessageUtil.success(list);
     }
+
+    @ApiOperation("通过班级名字查询")
+    @GetMapping("/findByClassName")
+    public Message findByClassName(String Classname){
+        List<SurveyEX> list =allSurveyService.findByClassName(Classname);
+        return MessageUtil.success(list);
+    }
+
+
+    @GetMapping("/findByAll")
+    @ApiOperation("条件查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Dname",value = "年级名",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(name = "Clname",value = "班级名",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(name = "Coname",value = "课程名",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(name = "Qname",value = "问卷名",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(name = "word",value = "关键字",paramType = "query",dataType = "String")
+    })
+    public Message findByAll(String Dname,String Clname,String Coname,String Qname,String word){
+        List<SurveyEX> list=allSurveyService.findByAll(Dname,Clname,Coname,Qname,word);
+        return MessageUtil.success(list);
+    }
+
 }

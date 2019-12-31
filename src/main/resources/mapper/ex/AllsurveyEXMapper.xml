@@ -42,4 +42,18 @@
         select * from briup_survey
     </select>
 
+
+    <select id="findByClassName" resultMap="Fsurvey">
+        select * from briup_survey,briup_clazz where briup_survey.clazz_id = briup_clazz.id AND briup_clazz.`name` LIKE #{Classname}
+    </select>
+
+    <select id="findByDepartmentNAme" resultMap="Fsurvey">
+        select * from briup_survey,briup_department where briup_survey.department_id = briup_department.id AND briup_department.`name` LIKE #{Dname}
+    </select>
+
+    <select id="findByAll" resultMap="Fsurvey">
+        select * from briup_survey,briup_teacher,briup_clazz,briup_department,briup_course,briup_questionnaire where briup_survey.department_id = briup_department.id AND briup_survey.clazz_id=briup_clazz.id AND briup_survey.course_id=briup_course.id AND briup_survey.questionnaire_id=briup_questionnaire.id AND briup_survey.user_id=briup_teacher.id AND briup_department.`name` LIKE #{param1} AND briup_clazz.`name` LIKE #{param2} AND briup_course.`name` LIKE #{param3} AND briup_questionnaire.`name` LIKE #{param4} AND (briup_department.`name` LIKE #{param5} OR briup_clazz.`name` LIKE #{param5} OR briup_course.`name` LIKE #{param5} OR briup_teacher.`name` LIKE #{param5} or briup_questionnaire.`name` LIKE #{param5})
+    </select>
+
+
 </mapper>
