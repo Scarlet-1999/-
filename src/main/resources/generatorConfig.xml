@@ -6,7 +6,7 @@
 <generatorConfiguration>
 
 	<classPathEntry
-		location="D:\alhj\repository\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar"/>
+		location="D:\java\repository\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar"/>
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
@@ -50,17 +50,7 @@
 
 
 		<!-- 映射配置 -->
-		<table tableName="briup_clazz" domainObjectName="Class"></table>
-		<table tableName="briup_course" domainObjectName="Course"></table>
-		<table tableName="briup_department" domainObjectName="Department"></table>
-		<table tableName="briup_log" domainObjectName="Log"></table>
-		<table tableName="briup_options" domainObjectName="Options"></table>
-		<table tableName="briup_qqn" domainObjectName="Qqn"></table>
-		<table tableName="briup_question" domainObjectName="Question"></table>
-		<table tableName="briup_questionnaire" domainObjectName="Questionnaire"></table>
-		<table tableName="briup_region" domainObjectName="Region"></table>
-		<table tableName="briup_survey" domainObjectName="Survey"></table>
-		<table tableName="briup_teacher" domainObjectName="Teacher"></table>
+		<table tableName="briup_answer" domainObjectName="Answer"></table>
 
 	</context>
 </generatorConfiguration>

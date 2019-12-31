@@ -1,13 +1,11 @@
 package com.briup.school.bean.ex;
 
-import com.briup.school.bean.Course;
-import com.briup.school.bean.Department;
-import com.briup.school.bean.Questionnaire;
-import com.briup.school.bean.Teacher;
+import com.briup.school.bean.*;
 import com.briup.school.bean.Class;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class SurveyEX implements Serializable {
     private Integer id;
@@ -29,6 +27,7 @@ public class SurveyEX implements Serializable {
 //    private Integer questionnaireId;
 
     private Double average;
+
     private Class aClass;
 
     private Course course;
@@ -38,6 +37,8 @@ public class SurveyEX implements Serializable {
     private Teacher user;
 
     private Questionnaire questionnaire;
+
+    private List<Answer> answers;
 
     public Integer getId() {
         return id;
@@ -143,8 +144,6 @@ public class SurveyEX implements Serializable {
         this.department = department;
     }
 
-
-
     public Questionnaire getQuestionnaire() {
         return questionnaire;
     }
@@ -159,5 +158,17 @@ public class SurveyEX implements Serializable {
 
     public void setUser(Teacher user) {
         this.user = user;
+    }
+
+    public void setSurveyday(Date surveyday) {
+        this.surveyday = surveyday;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }
