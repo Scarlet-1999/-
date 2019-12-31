@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.school.mapper.ex.QuestionnaireEXMapper">
+    <resultMap id="1" type="com.briup.school.bean.ex.QuestionnaireEX">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="date" jdbcType="TIMESTAMP" property="date" />
+        <collection property="qqnEXs"
+                    column="id"
+                    select="selectQqns"
+                    ofType="com.briup.school.bean.ex.QqnEX">
+        </collection>
+    </resultMap>
+
+    <resultMap id="2" type="com.briup.school.bean.ex.QqnEX">
+        <id column="id" jdbcType="INTEGER" property="id" />
+<!--        <result column="question_id" jdbcType="INTEGER" property="questionId" />-->
+        <result column="questionnaire_id" jdbcType="INTEGER" property="questionnaireId"></result>
+        <association property="questionEX" column="question_id" select="selectQuestion">
+        </association>
+    </resultMap>
+
+    <resultMap id="3" type="com.briup.school.bean.ex.QuestionEX">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <collection property="options"
+                    column="id"
+                    select="selectOption"
+                    ofType="com.briup.school.bean.Options">
+        </collection>
+    </resultMap>
+
+    <select id="selectById" resultMap="1">
+        select * from briup_questionnaire where id = #{id}
+    </select>
+
+    <select id="selectQqns" resultMap="2">
+        select * from briup_qqn where questionnaire_id = #{id}
+    </select>
+
+    <select id="selectQuestion" resultMap="3">
+        select * from briup_question where id=#{id}
+    </select>
+
+    <select id="selectOption" resultType="com.briup.school.bean.Options">
+        select * from briup_options where question_id = #{id}
+    </select>
+
+</mapper>

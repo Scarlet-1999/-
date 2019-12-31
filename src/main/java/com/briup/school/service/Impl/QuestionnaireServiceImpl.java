@@ -2,10 +2,12 @@ package com.briup.school.service.Impl;
 
 import com.briup.school.bean.*;
 import com.briup.school.bean.ex.QuestionEX;
+import com.briup.school.bean.ex.QuestionnaireEX;
 import com.briup.school.mapper.QqnMapper;
 import com.briup.school.mapper.QuestionnaireMapper;
 import com.briup.school.mapper.SurveyMapper;
 import com.briup.school.mapper.ex.QuestionEXMapper;
+import com.briup.school.mapper.ex.QuestionnaireEXMapper;
 import com.briup.school.service.IQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -144,6 +146,13 @@ public class QuestionnaireServiceImpl implements IQuestionnaireService {
 
         questionnaireMapper.deleteByPrimaryKey(id);
 
+    }
+    @Autowired
+    private QuestionnaireEXMapper questionnaireEXMapper;
+
+    @Override
+    public QuestionnaireEX selectById(int id) throws RuntimeException {
+        return questionnaireEXMapper.selectById(id);
     }
 
 

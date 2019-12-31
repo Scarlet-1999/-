@@ -98,5 +98,12 @@ public class QuestionnaireController {
         return MessageUtil.success("删除成功");
     }
 
+    @GetMapping("/previewById")
+    @ApiOperation("预览")
+    @ApiImplicitParam(name = "id",value = "id",paramType = "query",dataType = "int",required = true)
+    public Message previewById(int id){
+        return MessageUtil.success(questionnaireService.selectById(id));
+    }
+
 
 }

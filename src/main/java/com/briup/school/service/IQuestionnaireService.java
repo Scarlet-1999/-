@@ -2,6 +2,7 @@ package com.briup.school.service;
 
 import com.briup.school.bean.Questionnaire;
 import com.briup.school.bean.ex.QuestionEX;
+import com.briup.school.bean.ex.QuestionnaireEX;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface IQuestionnaireService {
 
     List<QuestionEX> seeQuestionByid(int id) throws RuntimeException;
     void  deleteInManyTable(int id);
+
+    QuestionnaireEX selectById(int id)  throws RuntimeException;
 
 }
