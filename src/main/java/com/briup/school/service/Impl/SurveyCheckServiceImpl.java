@@ -1,9 +1,8 @@
 package com.briup.school.service.Impl;
 
-import com.briup.school.bean.Questionnaire;
-import com.briup.school.bean.QuestionnaireExample;
-import com.briup.school.bean.SurveyExample;
+import com.briup.school.bean.AnswerExample;
 import com.briup.school.bean.ex.SurveyEX;
+import com.briup.school.mapper.AnswerMapper;
 import com.briup.school.mapper.QuestionnaireMapper;
 import com.briup.school.mapper.SurveyMapper;
 import com.briup.school.mapper.ex.SurveyEXMapper;
@@ -17,26 +16,29 @@ public class SurveyCheckServiceImpl implements ISurveyCheckService {
     private SurveyEXMapper surveyEXMapper;
 
     @Autowired
-    private QuestionnaireMapper questionnaireMapper;
-
     private SurveyMapper surveyMapper;
+
     public List<SurveyEX> selectAll() throws RuntimeException{
         return surveyEXMapper.FindAll();
     }
 
+    @Autowired
+    private AnswerMapper answerMapper;
+
     @Override
-    public List<SurveyEX> searchByName(String word) throws RuntimeException {
-        //根据名字在Questionnaire表中查id
-        QuestionnaireExample example = new QuestionnaireExample();
-        example.createCriteria().andNameLike(word);
-        List<Questionnaire> list=questionnaireMapper.selectByExample(example);
-        for(Questionnaire questionnaire:list){
+    public void check(int id) throws RuntimeException {
+        String statu = surveyMapper.selectByPrimaryKey(id).getStatus();
+        if ("未审核".equals(statu)){
 
-            SurveyExample surveyExample = new SurveyExample();
-            surveyExample.createCriteria().andQuestionnaireIdEqualTo(questionnaire.getId());
-            surveyMapper.selectByExample(surveyExample);
+            AnswerExample answerExample = new AnswerExample();
+            answerExample.createCriteria().andSurveyIdEqualTo(id);
+            answerMapper.selectByExample(answerExample);
+
+
+
+            //展示包括平均分及问题列表的界面
+        }else{
+            new RuntimeException("当前课调未开启或已审核");
         }
-
-        return null;
     }
 }
