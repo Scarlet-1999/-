@@ -1,9 +1,9 @@
 package com.briup.school.service.Impl;
 
+import com.briup.school.bean.Answer;
 import com.briup.school.bean.AnswerExample;
 import com.briup.school.bean.ex.SurveyEX;
 import com.briup.school.mapper.AnswerMapper;
-import com.briup.school.mapper.QuestionnaireMapper;
 import com.briup.school.mapper.SurveyMapper;
 import com.briup.school.mapper.ex.SurveyEXMapper;
 import com.briup.school.service.ISurveyCheckService;
@@ -37,11 +37,24 @@ public class SurveyCheckServiceImpl implements ISurveyCheckService {
             answerExample.createCriteria().andSurveyIdEqualTo(id);
             SurveyEX surveyEX = surveyEXMapper.FindById(id);
             surveyEX.setAnswers(answerMapper.selectByExample(answerExample));
-            return surveyEX;
+
             //展示包括平均分及问题列表的界面
+            return surveyEX;
         }else{
             new RuntimeException("当前课调未开启或已审核");
             return null;
         }
+    }
+
+    @Override
+    public void updateAnswer(Answer answer) throws RuntimeException {
+        Answer answerPre= answerMapper.selectByPrimaryKey(answer.getId());
+        answer.setSurveyId(answerPre.getSurveyId());
+        answerMapper.updateByPrimaryKey(answer);
+    }
+
+    @Override
+    public void deleteAnswer(int id) throws RuntimeException {
+        answerMapper.deleteByPrimaryKey(id);
     }
 }

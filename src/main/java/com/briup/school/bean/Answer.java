@@ -1,5 +1,7 @@
 package com.briup.school.bean;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class Answer implements Serializable {
@@ -7,6 +9,7 @@ public class Answer implements Serializable {
 
     private String answer;
 
+    @ApiModelProperty(hidden = true)
     private Integer surveyId;
 
     private static final long serialVersionUID = 1L;

@@ -1,5 +1,6 @@
 package com.briup.school.web.controller;
 
+import com.briup.school.bean.Answer;
 import com.briup.school.bean.Questionnaire;
 import com.briup.school.bean.ex.SurveyEX;
 import com.briup.school.service.IQuestionnaireService;
@@ -11,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,4 +50,19 @@ public class SurveyCheckController {
     public Message check(int id){
         return MessageUtil.success(iSurveyCheckService.check(id));
     }
+
+    @PostMapping("updateAnswer")
+    @ApiOperation(value = "修改答案")
+    public Message updateAnswer(Answer answer){
+        iSurveyCheckService.updateAnswer(answer);
+        return MessageUtil.success();
+    }
+
+    @GetMapping("deleteAnswer")
+    @ApiOperation(value = "删除答案")
+    public Message deleteAnswer(int id){
+        iSurveyCheckService.deleteAnswer(id);
+        return MessageUtil.success();
+    }
+
 }
