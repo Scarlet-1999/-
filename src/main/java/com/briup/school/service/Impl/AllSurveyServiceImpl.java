@@ -51,7 +51,7 @@ public class AllSurveyServiceImpl implements IAllSurveyService {
 
 
         word="%"+word+"%";
-        System.out.println(word);
+        //System.out.println(word);
         List<SurveyEX> list=allSurveyEXMapper.findByAll(Dname,Clname,Coname,Qname,word);
 
         return list;
