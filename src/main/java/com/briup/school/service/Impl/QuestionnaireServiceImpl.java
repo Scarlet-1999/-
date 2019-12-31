@@ -86,6 +86,9 @@ public class QuestionnaireServiceImpl implements IQuestionnaireService {
     }
 
     @Override
+
+
+
     public void addOrUpdate(Questionnaire questionnaire, int[] Qids) throws RuntimeException {
         if(questionnaire==null){
             throw new RuntimeException("参数为空");
