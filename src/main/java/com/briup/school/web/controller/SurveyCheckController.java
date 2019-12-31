@@ -3,6 +3,7 @@ package com.briup.school.web.controller;
 import com.briup.school.bean.Questionnaire;
 import com.briup.school.bean.ex.SurveyEX;
 import com.briup.school.service.IQuestionnaireService;
+import com.briup.school.service.ISurveyCheckService;
 import com.briup.school.service.ISurveyService;
 import com.briup.school.util.Message;
 import com.briup.school.util.MessageUtil;
@@ -39,11 +40,12 @@ public class SurveyCheckController {
         return MessageUtil.success(surveyEXs);
     }
 
+    @Autowired
+    private ISurveyCheckService iSurveyCheckService;
+
     @GetMapping("check")
     @ApiOperation(value = "审核")
     public Message check(int id){
-        return MessageUtil.success();
+        return MessageUtil.success(iSurveyCheckService.check(id));
     }
-
-
 }

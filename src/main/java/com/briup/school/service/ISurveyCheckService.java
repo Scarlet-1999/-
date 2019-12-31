@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface ISurveyCheckService {
     List<SurveyEX> selectAll() throws RuntimeException;
-    void check(int id) throws RuntimeException;
+
+    SurveyEX check(int id) throws RuntimeException;
 
 
 
