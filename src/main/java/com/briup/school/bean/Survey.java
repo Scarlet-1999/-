@@ -1,27 +1,39 @@
 package com.briup.school.bean;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Survey implements Serializable {
+    @ApiModelProperty(value = "课调id")
     private Integer id;
 
+    @ApiModelProperty(value = "课调状态")
     private String status;
 
+    @ApiModelProperty(value = "课调编码")
     private Integer code;
 
+    @ApiModelProperty(value = "课调开始日期")
     private Date surveyday;
 
+    @ApiModelProperty(value = "年级id")
     private Integer departmentId;
 
+    @ApiModelProperty(value = "课程id")
     private Integer courseId;
 
+    @ApiModelProperty(value = "班级id")
     private Integer clazzId;
 
+    @ApiModelProperty(value = "教师id")
     private Integer userId;
 
+    @ApiModelProperty(value = "问卷id")
     private Integer questionnaireId;
 
+    @ApiModelProperty(value = "平均分")
     private Double average;
 
     private static final long serialVersionUID = 1L;

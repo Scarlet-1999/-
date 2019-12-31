@@ -2,6 +2,7 @@ package com.briup.school.web.controller;
 
 import com.briup.school.bean.Questionnaire;
 import com.briup.school.bean.Survey;
+import com.briup.school.bean.ex.QuestionnaireEX;
 import com.briup.school.bean.ex.SurveyEX;
 import com.briup.school.service.IQuestionnaireService;
 import com.briup.school.service.ISurveyService;
@@ -27,6 +28,8 @@ public class SurveyController {
     @Autowired
     private IQuestionnaireService iQuestionnaireService;
 
+
+
     @GetMapping("/findall")
     @ApiOperation(value = "查看所有课调")
     public Message FindAll(){
@@ -50,6 +53,25 @@ public class SurveyController {
         return MessageUtil.success(list);
     }
 
+    @GetMapping("/findbyid")
+    @ApiOperation(value = "预览")
+    public Message FindById(int id){
+        SurveyEX s=iSurveyService.FindById(id);
+        QuestionnaireEX q=iQuestionnaireService.selectById(s.getQuestionnaireEX().getId());
+        s.setQuestionnaireEX(q);
+        return MessageUtil.success(s);
+    }
+
+
+    @GetMapping("/saveorupdate")
+    @ApiOperation(value = "课调的添加与修改")
+    public Message SaveOrUpdate(Survey survey){
+        iSurveyService.SaveOrUpdate(survey);
+        System.out.println(survey.getId());
+        System.out.println(survey.getDepartmentId());
+        System.out.println(survey==null);
+        return MessageUtil.success();
+    }
 
 
 }

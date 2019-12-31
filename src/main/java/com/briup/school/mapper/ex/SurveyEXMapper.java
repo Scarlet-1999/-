@@ -8,5 +8,7 @@ import java.util.List;
 public interface SurveyEXMapper {
     List<SurveyEX> FindAll();
     List<SurveyEX> FindByCondition(int id);
+    SurveyEX FindById(int id);
+
 
 }

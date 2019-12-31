@@ -37,7 +37,29 @@ public class SurveyEX implements Serializable {
 
     private Teacher user;
 
+    private QuestionnaireEX questionnaireEX;
+
     private Questionnaire questionnaire;
+
+    public Questionnaire getQuestionnaire() {
+        return questionnaire;
+    }
+
+    public void setQuestionnaire(Questionnaire questionnaire) {
+        this.questionnaire = questionnaire;
+    }
+
+    public void setSurveyday(Date surveyday) {
+        this.surveyday = surveyday;
+    }
+
+    public QuestionnaireEX getQuestionnaireEX() {
+        return questionnaireEX;
+    }
+
+    public void setQuestionnaireEX(QuestionnaireEX questionnaireEX) {
+        this.questionnaireEX = questionnaireEX;
+    }
 
     public Integer getId() {
         return id;
@@ -143,15 +165,6 @@ public class SurveyEX implements Serializable {
         this.department = department;
     }
 
-
-
-    public Questionnaire getQuestionnaire() {
-        return questionnaire;
-    }
-
-    public void setQuestionnaire(Questionnaire questionnaire) {
-        this.questionnaire = questionnaire;
-    }
 
     public Teacher getUser() {
         return user;
