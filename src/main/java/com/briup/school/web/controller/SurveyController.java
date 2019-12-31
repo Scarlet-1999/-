@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,15 +64,47 @@ public class SurveyController {
     }
 
 
-    @GetMapping("/saveorupdate")
+    @PostMapping("/saveorupdate")
     @ApiOperation(value = "课调的添加与修改")
     public Message SaveOrUpdate(Survey survey){
-        iSurveyService.SaveOrUpdate(survey);
-        System.out.println(survey.getId());
-        System.out.println(survey.getDepartmentId());
-        System.out.println(survey==null);
+        char info=iSurveyService.SaveOrUpdate(survey);
+        //System.out.println(survey.getId());
+        //System.out.println(survey.getDepartmentId());
+        //System.out.println(survey==null);
+        System.out.println(info);
+
+        if (info=='1')
+            return MessageUtil.success("不存在这个年级id");
+        if (info=='2')
+            return MessageUtil.success("不存在这个课程id");
+        if (info=='3')
+            return MessageUtil.success("不存在这个班级id");
+        if (info=='4')
+            return MessageUtil.success("不存在这个教师id");
+        if (info=='5')
+            return MessageUtil.success("不存在这个问卷id");
+        if (info=='s')
+            return MessageUtil.success("成功");
+        else {
+            return MessageUtil.success("失败了");
+        }
+    }
+
+    @GetMapping("/deletebyid")
+    @ApiOperation(value = "更据id删除")
+    public Message DeleteById(int id){
+        iSurveyService.DeleteById(id);
         return MessageUtil.success();
     }
 
+
+    @GetMapping("/deletebatch")
+    @ApiOperation(value = "批量删除")
+    public Message DeleteBatch(int[] ids){
+        for (int i:ids){
+            iSurveyService.DeleteById(i);
+        }
+        return MessageUtil.success();
+    }
 
 }

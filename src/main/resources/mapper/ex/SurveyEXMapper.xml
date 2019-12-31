@@ -12,7 +12,6 @@
         <association property="aClass" column="clazz_id" select="selectClass"></association>
         <association property="user" column="user_id" select="selectTeacher"></association>
         <association property="questionnaire" column="questionnaire_id" select="selectQuestionnaire"></association>
-        <association property="questionnaireEX" column="questionnaire_id"></association>
     </resultMap>
 
     <select id="FindAll" resultMap="abn">
@@ -35,7 +34,7 @@
     </select>
 
     <select id="FindByCondition" resultMap="abn">
-        select name from briup_survey where questionnaire_id = #{id}
+        select * from briup_survey where questionnaire_id = #{id}
     </select>
 
     <resultMap id="ab1" type="com.briup.school.bean.ex.SurveyEX">
@@ -49,7 +48,6 @@
         <association property="aClass" column="clazz_id" select="selectClass"></association>
         <association property="user" column="user_id" select="selectTeacher"></association>
         <association property="questionnaireEX" column="questionnaire_id" select="selectQ"></association>
-        <association property="questionnaire" column="questionnaire_id"></association>
     </resultMap>
 
 

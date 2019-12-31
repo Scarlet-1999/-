@@ -3,7 +3,7 @@ package com.briup.school.service.Impl;
 import com.briup.school.bean.Questionnaire;
 import com.briup.school.bean.Survey;
 import com.briup.school.bean.ex.SurveyEX;
-import com.briup.school.mapper.SurveyMapper;
+import com.briup.school.mapper.*;
 import com.briup.school.mapper.ex.SurveyEXMapper;
 import com.briup.school.service.ISurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,20 @@ public class SurveyServiceImpl implements ISurveyService {
     @Autowired
     private SurveyMapper surveyMapper;
 
+    @Autowired
+    private DepartmentMapper departmentMapper;
 
+    @Autowired
+    private CourseMapper courseMapper;
+
+    @Autowired
+    private ClassMapper classMapper;
+
+    @Autowired
+    private TeacherMapper teacherMapper;
+
+    @Autowired
+    private QuestionnaireMapper questionnaireMapper;
 
 
     @Override
@@ -32,7 +45,7 @@ public class SurveyServiceImpl implements ISurveyService {
     @Override
     public List<SurveyEX> FindByCondition(List<Questionnaire> list) throws RuntimeException {
         List<SurveyEX> l = new ArrayList<SurveyEX>();
-        for(Questionnaire q:list){
+        for (Questionnaire q : list) {
             l.addAll(surveyEXMapper.FindByCondition(q.getId()));
         }
         return l;
@@ -47,21 +60,64 @@ public class SurveyServiceImpl implements ISurveyService {
     }
 
     @Override
-    public void SaveOrUpdate(Survey survey) throws RuntimeException {
-        //id不为空为增加操作
-        if (survey.getId()!=null||"".equals(survey.getId())){
-            //不为空开始判断外键存在问题(这里的逻辑还在写不要动！！！)
-            boolean flag=true;
-            if(flag){
+    public char SaveOrUpdate(Survey survey) throws RuntimeException {
 
+        boolean f1, f2, f3, f4, f5;
+        char info='i';
+        //设定true为存在id
+        f1 = !(departmentMapper.selectByPrimaryKey(survey.getDepartmentId()) == null);
+        f2 = !(courseMapper.selectByPrimaryKey(survey.getCourseId()) == null);
+        f3 = !(classMapper.selectByPrimaryKey(survey.getClazzId()) == null);
+        f4 = !(teacherMapper.selectByPrimaryKey(survey.getUserId()) == null);
+        f5 = !(questionnaireMapper.selectByPrimaryKey(survey.getQuestionnaireId()) == null);
+
+
+        System.out.println(info);
+        if (!f1) info='1';
+        if (!f2) info='2';
+        if (!f3) info='3';
+        if (!f4) info='4';
+        if (!f5) info='5';
+
+        System.out.println(info);
+
+        //id不为空为增加操作
+        if (survey.getId() != null || "".equals(survey.getId())) {
+            //不为空开始判断外键存在问题
+            if (f1&&f2&&f3&&f4&&f5) {
+                info ='s';
+                surveyMapper.updateByPrimaryKey(survey);
+
+            }
+            if ("开启".equals(survey.getStatus())){
+                System.out.println(123);
+                survey.setCode((int)Math.round((Math.random()+1) * 1000));
                 surveyMapper.updateByPrimaryKey(survey);
             }
 
+            return info;
 
-        }
-        else {
-            surveyMapper.insert(survey);
-        }
+        } else {
+            if (f1&&f2&&f3&&f4&&f5) {
+                surveyMapper.insert(survey);
+                info ='s';
+            }
+
+            System.out.println(123);
+           // System.out.println("开启".equals(survey.getStatus()));
+            if (true){
+                survey.setCode((int)Math.round((Math.random()+1) * 1000));
+                System.out.println(survey.getCode());
+                System.out.println("已修改");
+                surveyMapper.insert(survey);
+            }
+
+            return info;
+          }
     }
 
+    @Override
+    public void DeleteById(int id) throws RuntimeException {
+        surveyMapper.deleteByPrimaryKey(id);
+    }
 }

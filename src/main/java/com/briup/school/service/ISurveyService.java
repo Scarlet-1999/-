@@ -13,6 +13,7 @@ public interface ISurveyService {
 
     SurveyEX FindById(int id) throws RuntimeException;
 
-    void SaveOrUpdate(Survey survey) throws RuntimeException;
+    char SaveOrUpdate(Survey survey) throws RuntimeException;
 
+    void DeleteById(int id) throws RuntimeException;
 }
