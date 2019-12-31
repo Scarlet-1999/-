@@ -3,6 +3,8 @@ package com.briup.school.mapper;
 import com.briup.school.bean.Qqn;
 import com.briup.school.bean.QqnExample;
 import java.util.List;
+
+import com.briup.school.bean.ex.QqnEX;
 import org.apache.ibatis.annotations.Param;
 
 public interface QqnMapper {
@@ -27,4 +29,6 @@ public interface QqnMapper {
     int updateByPrimaryKeySelective(Qqn record);
 
     int updateByPrimaryKey(Qqn record);
+
+
 }

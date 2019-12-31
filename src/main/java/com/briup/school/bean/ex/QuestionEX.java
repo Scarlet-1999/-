@@ -52,13 +52,5 @@ public class QuestionEX {
         return serialVersionUID;
     }
 
-    @Override
-    public String toString() {
-        return "QuestionEX{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", options=" + options +
-                '}';
-    }
+
 }
