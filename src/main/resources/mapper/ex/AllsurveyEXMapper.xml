@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.school.mapper.ex.AllSurveyEXMapper">
+
+    <resultMap id="Fsurvey" type="com.briup.school.bean.ex.SurveyEX">
+        <id column="id" property="id"></id>
+        <result column="status" property="status"></result>
+        <result column="code" property="code"></result>
+        <result column="average" property="average"></result>
+        <result column="surveyday" property="surveyday"></result>
+        <association property="aClass" column="clazz_id" select="fclass"></association>
+        <association property="department" column="department_id" select="fdepartment"></association>
+        <association property="course" column="course_id" select="fcourse"></association>
+        <association property="user" column="user_id" select="fuser"></association>
+        <association property="questionnaire" column="questionnaire_id" select="fquestionnaire"></association>
+
+    </resultMap>
+
+    <select id="fclass" resultType="com.briup.school.bean.Class">
+        select * from briup_clazz where id=#{Cid}
+    </select>
+
+    <select id="fdepartment" resultType="com.briup.school.bean.Department">
+        select * from briup_department where id=#{Did}
+    </select>
+
+    <select id="fcourse" resultType="com.briup.school.bean.Course">
+        select * from briup_course where id=#{Cid}
+    </select>
+
+
+    <select id="fuser" resultType="com.briup.school.bean.Teacher">
+        select * from briup_teacher where id=#{Uid}
+    </select>
+
+    <select id="fquestionnaire" resultType="com.briup.school.bean.Questionnaire">
+        select * from briup_questionnaire where id=#{Qnid}
+    </select>
+
+
+    <select id="FindAll" resultMap="Fsurvey">
+        select * from briup_survey
+    </select>
+
+</mapper>
