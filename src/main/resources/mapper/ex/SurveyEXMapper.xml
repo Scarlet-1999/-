@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.school.mapper.ex.SurveyEXMapper">
+    <resultMap id="abn" type="com.briup.school.bean.ex.SurveyEX">
+        <id column="id" property="id"></id>
+        <result column="status" property="status"></result>
+        <result column="code" property="code"></result>
+        <result column="average" property="average"></result>
+        <result column="surveyday" property="surveyday"></result>
+        <association property="department" column="department_id" select="selectDepart"></association>
+        <association property="course" column="course_id" select="selectCourse"></association>
+        <association property="aClass" column="clazz_id" select="selectClass"></association>
+        <association property="user" column="user_id" select="selectTeacher"></association>
+        <association property="questionnaire" column="questionnaire_id" select="selectQuestionnaire"></association>
+    </resultMap>
+
+    <select id="FindAll" resultMap="abn">
+        select *from briup_survey
+    </select>
+    <select id="selectDepart" resultType="com.briup.school.bean.Department">
+        select * from briup_department where id=#{id}
+    </select>
+    <select id="selectCourse" resultType="com.briup.school.bean.Course">
+        select * from briup_course where id=#{id}
+    </select>
+    <select id="selectClass" resultType="com.briup.school.bean.Class">
+        select * from briup_clazz where id=#{id}
+    </select>
+    <select id="selectTeacher" resultType="com.briup.school.bean.Teacher">
+        select * from briup_teacher where id=#{id}
+    </select>
+    <select id="selectQuestionnaire" resultType="com.briup.school.bean.Questionnaire">
+        select * from briup_questionnaire where id=#{id}
+    </select>
+
+
+    <select id="FindByCondition" resultMap="abn">
+        select * from briup_survey where questionnaire_id = #{id}
+    </select>
+
+
+
+</mapper>
