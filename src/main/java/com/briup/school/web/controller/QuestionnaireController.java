@@ -1,7 +1,6 @@
 package com.briup.school.web.controller;
 
 import com.briup.school.bean.Questionnaire;
-import com.briup.school.bean.ex.QqnEX;
 import com.briup.school.bean.ex.QuestionEX;
 import com.briup.school.service.IQuestionnaireService;
 import com.briup.school.util.Message;
@@ -91,13 +90,6 @@ public class QuestionnaireController {
         return MessageUtil.success(list);
     }
 
-
-    @GetMapping("/selectByQuId")
-    @ApiOperation(value = "id查询所有问卷信息")
-    public Message selectByQuId(int id){
-        List<QqnEX> qqnEXES = questionnaireService.selectByQuId(id);
-        return MessageUtil.success(qqnEXES);
-    }
     @GetMapping("/deleteInManyTable")
     @ApiOperation(value = "按id多表删除")
     public Message deleteById(int id){

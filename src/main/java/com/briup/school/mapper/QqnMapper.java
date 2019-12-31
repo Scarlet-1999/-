@@ -4,7 +4,6 @@ import com.briup.school.bean.Qqn;
 import com.briup.school.bean.QqnExample;
 import java.util.List;
 
-import com.briup.school.bean.ex.QqnEX;
 import org.apache.ibatis.annotations.Param;
 
 public interface QqnMapper {

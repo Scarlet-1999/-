@@ -1,12 +1,10 @@
 package com.briup.school.service.Impl;
 
 import com.briup.school.bean.*;
-import com.briup.school.bean.ex.QqnEX;
 import com.briup.school.bean.ex.QuestionEX;
 import com.briup.school.mapper.QqnMapper;
 import com.briup.school.mapper.QuestionnaireMapper;
 import com.briup.school.mapper.SurveyMapper;
-import com.briup.school.mapper.ex.QqnEXMapper;
 import com.briup.school.mapper.ex.QuestionEXMapper;
 import com.briup.school.service.IQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +24,6 @@ public class QuestionnaireServiceImpl implements IQuestionnaireService {
 
     @Autowired
     private QuestionEXMapper questionEXMapper;
-
-    @Autowired
-    private QqnEXMapper qqnExMapper;
 
     @Override
     public List<Questionnaire> findAll() throws RuntimeException {
@@ -135,10 +130,6 @@ public class QuestionnaireServiceImpl implements IQuestionnaireService {
     }
 
 
-    public List<QqnEX> selectByQuId(int id) throws RuntimeException {
-        List<QqnEX> qqnExes=qqnExMapper.selectByQuId(id);
-        return qqnExes;
-    }
     public void  deleteInManyTable(int id){
         QqnExample qqnExample = new QqnExample();
         qqnExample.createCriteria().andQuestionnaireIdEqualTo(id);
