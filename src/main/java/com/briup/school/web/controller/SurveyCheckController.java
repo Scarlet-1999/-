@@ -45,10 +45,10 @@ public class SurveyCheckController {
     @Autowired
     private ISurveyCheckService iSurveyCheckService;
 
-    @GetMapping("check")
-    @ApiOperation(value = "审核")
-    public Message check(int id){
-        return MessageUtil.success(iSurveyCheckService.check(id));
+    @GetMapping("showDetails")
+    @ApiOperation(value = "显示审核信息")
+    public Message showDetails(int id){
+        return MessageUtil.success(iSurveyCheckService.showDetail(id));
     }
 
     @PostMapping("updateAnswer")
@@ -64,5 +64,13 @@ public class SurveyCheckController {
         iSurveyCheckService.deleteAnswer(id);
         return MessageUtil.success();
     }
+
+    @GetMapping("check")
+    @ApiOperation(value = "审核提交")
+    public Message check(int key,int id){
+        iSurveyCheckService.check(key,id);
+        return MessageUtil.success();
+    }
+
 
 }

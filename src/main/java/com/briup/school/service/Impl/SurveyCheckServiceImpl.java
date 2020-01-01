@@ -2,6 +2,7 @@ package com.briup.school.service.Impl;
 
 import com.briup.school.bean.Answer;
 import com.briup.school.bean.AnswerExample;
+import com.briup.school.bean.Survey;
 import com.briup.school.bean.ex.SurveyEX;
 import com.briup.school.mapper.AnswerMapper;
 import com.briup.school.mapper.SurveyMapper;
@@ -29,7 +30,7 @@ public class SurveyCheckServiceImpl implements ISurveyCheckService {
     private AnswerMapper answerMapper;
 
     @Override
-    public SurveyEX check(int id) throws RuntimeException {
+    public SurveyEX showDetail(int id) throws RuntimeException {
         String statu = surveyMapper.selectByPrimaryKey(id).getStatus();
         if ("未审核".equals(statu)){
             //查询答案列表并赋值给查询到的surveyEX的answers
@@ -56,5 +57,19 @@ public class SurveyCheckServiceImpl implements ISurveyCheckService {
     @Override
     public void deleteAnswer(int id) throws RuntimeException {
         answerMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void check(int key, int id) throws RuntimeException {
+        Survey survey = surveyMapper.selectByPrimaryKey(id);
+        if(key == 1){
+            survey.setStatus("审核通过");
+            surveyMapper.updateByPrimaryKey(survey);
+        }else if(key == 2){
+            survey.setStatus("审核不通过");
+            surveyMapper.updateByPrimaryKey(survey);
+        }else{
+            new RuntimeException("操作有误");
+        }
     }
 }
