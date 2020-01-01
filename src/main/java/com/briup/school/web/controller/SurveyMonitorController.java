@@ -36,16 +36,17 @@ private   IQuestionnaireService iQuestionnaireService;
 
     }
     @GetMapping("changeStatusOn")
-    @ApiOperation(value = "开启课调")
+    @ApiOperation(value = "开启未开启的课调")
 public Message changeStatusOn(int id){
- surveyMonitorService.changeStatusOn(id);
-    return MessageUtil.success("更改成功");
+
+
+    return MessageUtil.success(surveyMonitorService.changeStatusOn(id));
 }
     @GetMapping("changeStatusOff")
-    @ApiOperation(value = "结束课调")
+    @ApiOperation(value = "结束开启的课调")
     public Message changeStatusOff(int id){
-        surveyMonitorService.changeStatusOn(id);
-        return MessageUtil.success("更改成功");
+
+        return MessageUtil.success(surveyMonitorService.changeStatusOff(id));
     }
     @GetMapping("/FindByCondition")
     @ApiOperation(value = "根据条件查询课调信息")
