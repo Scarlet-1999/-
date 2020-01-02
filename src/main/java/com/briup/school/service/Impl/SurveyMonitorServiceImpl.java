@@ -29,7 +29,7 @@ public class SurveyMonitorServiceImpl implements ISurveyMonitorService {
     }
 
     @Override
-    public String changeStatusOn(int id) {
+    public void changeStatusOn(int id) {
         String statu = surveyMapper.selectByPrimaryKey(id).getStatus();
         if("未开启".equals(statu)){
         SurveyExample example=new SurveyExample();
@@ -38,26 +38,29 @@ public class SurveyMonitorServiceImpl implements ISurveyMonitorService {
       int  code= (int) Math.round((Math.random()+1) * 1000);
         survey.setCode(code);
         survey.setStatus("开启");
-        surveyMapper.updateByExampleSelective(survey,example);
-        return "课调开启成功";}
-        else {return "课调已开启或进入审核阶段";
+        surveyMapper.updateByExampleSelective(survey,example); }
+        else {
+
+            throw new RuntimeException("该课调不符合开启条件") ;
 
         }
     }
 
     @Override
-    public String changeStatusOff(int id) {
+    public void changeStatusOff(int id) {
         String statu = surveyMapper.selectByPrimaryKey(id).getStatus();
         if("开启".equals(statu)){
         SurveyExample example=new SurveyExample();
         example.createCriteria().andIdEqualTo(id);
         Survey survey= new Survey();
-        survey.setCode(id);
+//            int  code= (int) Math.round((Math.random()+1) * 1000);
+//        survey.setCode(code);
         survey.setStatus("未审核");
         surveyMapper.updateByExampleSelective(survey,example);
-        return "课调结束成功，已经进入待审核阶段";
-        }else {
-        return "课调未开启或已进入审核阶段";}
+       // return "课调结束成功，已经进入待审核阶段";
+        }else {          throw new RuntimeException("该课调不符合开启条件") ;
+      //  return "该课调不符合结束条件";
+            }
     }
 
     @Override

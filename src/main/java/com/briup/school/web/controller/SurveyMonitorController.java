@@ -40,13 +40,14 @@ private   IQuestionnaireService iQuestionnaireService;
 public Message changeStatusOn(int id){
 
 
-    return MessageUtil.success(surveyMonitorService.changeStatusOn(id));
+    surveyMonitorService.changeStatusOn(id);
+    return MessageUtil.success("操作成功");
 }
     @GetMapping("changeStatusOff")
     @ApiOperation(value = "结束开启的课调")
     public Message changeStatusOff(int id){
-
-        return MessageUtil.success(surveyMonitorService.changeStatusOff(id));
+        surveyMonitorService.changeStatusOff(id);
+        return MessageUtil.success("操作成功");
     }
     @GetMapping("/FindByCondition")
     @ApiOperation(value = "根据条件查询课调信息")

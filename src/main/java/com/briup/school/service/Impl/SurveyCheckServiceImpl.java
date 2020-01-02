@@ -42,8 +42,7 @@ public class SurveyCheckServiceImpl implements ISurveyCheckService {
             //展示包括平均分及问题列表的界面
             return surveyEX;
         }else{
-            new RuntimeException("当前课调未开启或已审核");
-            return null;
+            throw new RuntimeException("操作有误");
         }
     }
 
@@ -59,6 +58,7 @@ public class SurveyCheckServiceImpl implements ISurveyCheckService {
         answerMapper.deleteByPrimaryKey(id);
     }
 
+    //该方法无需判断状态 因为在显示具体信息时已判断
     @Override
     public void check(int key, int id) throws RuntimeException {
         Survey survey = surveyMapper.selectByPrimaryKey(id);
@@ -69,7 +69,7 @@ public class SurveyCheckServiceImpl implements ISurveyCheckService {
             survey.setStatus("审核不通过");
             surveyMapper.updateByPrimaryKey(survey);
         }else{
-            new RuntimeException("操作有误");
+            throw new RuntimeException("操作有误");
         }
     }
 }
