@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -62,6 +63,7 @@ public class SurveyServiceImpl implements ISurveyService {
     @Override
     public char SaveOrUpdate(Survey survey) throws RuntimeException {
 
+
         boolean f1, f2, f3, f4, f5;
         char info='i';
         //设定true为存在id
@@ -81,8 +83,9 @@ public class SurveyServiceImpl implements ISurveyService {
 
         System.out.println(info);
 
-        //id不为空为增加操作
+        //id不为空为更新操作
         if (survey.getId() != null || "".equals(survey.getId())) {
+
             //不为空开始判断外键存在问题
             if (f1&&f2&&f3&&f4&&f5) {
                 info ='s';
@@ -91,13 +94,16 @@ public class SurveyServiceImpl implements ISurveyService {
             }
             if ("开启".equals(survey.getStatus())){
                 System.out.println(123);
-                survey.setCode((int)Math.round((Math.random()+1) * 1000));
+                int code=(int)Math.round((Math.random()+1) * System.currentTimeMillis());
+                code=code%10000;
+                survey.setCode(Math.abs(code));
                 surveyMapper.updateByPrimaryKey(survey);
             }
 
             return info;
 
         } else {
+            survey.setSurveyday(new Date());
             if (f1&&f2&&f3&&f4&&f5) {
                 surveyMapper.insert(survey);
                 info ='s';
@@ -105,8 +111,13 @@ public class SurveyServiceImpl implements ISurveyService {
 
             System.out.println(123);
            // System.out.println("开启".equals(survey.getStatus()));
-            if (true){
-                survey.setCode((int)Math.round((Math.random()+1) * 1000));
+            if ("开启".equals(survey.getStatus())){
+                int code=(int)Math.round((Math.random()+1) * System.currentTimeMillis());
+
+                //取尾
+                code=code%10000;
+
+                survey.setCode(Math.abs(code));
                 System.out.println(survey.getCode());
                 System.out.println("已修改");
                 surveyMapper.insert(survey);
