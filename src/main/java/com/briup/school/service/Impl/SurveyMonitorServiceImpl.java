@@ -10,7 +10,9 @@ import com.briup.school.service.ISurveyMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,10 +23,8 @@ public class SurveyMonitorServiceImpl implements ISurveyMonitorService {
    private SurveyMapper surveyMapper;
     @Override
     public List<SurveyEX> selectAll() {
-        List<SurveyEX> surveyEXES=surveyEXMapper.FindAll();
 
-
-
+        List<SurveyEX> surveyEXES=surveyEXMapper.lhjFindAll();
         return surveyEXES;
     }
 
@@ -35,6 +35,7 @@ public class SurveyMonitorServiceImpl implements ISurveyMonitorService {
         SurveyExample example=new SurveyExample();
         example.createCriteria().andIdEqualTo(id);
         Survey survey= new Survey();
+
       int  code= (int) Math.round((Math.random()+1) * 1000);
         survey.setCode(code);
         survey.setStatus("开启");
@@ -67,7 +68,7 @@ public class SurveyMonitorServiceImpl implements ISurveyMonitorService {
     public List<SurveyEX> FindByCondition(List<Questionnaire> list) throws RuntimeException {
         List<SurveyEX> l = new ArrayList<SurveyEX>();
         for(Questionnaire q:list){
-            l.addAll(surveyEXMapper.FindByCondition(q.getId()));
+            l.addAll(surveyEXMapper.lhjFindByCondition(q.getId()));
         }
         return l;
 

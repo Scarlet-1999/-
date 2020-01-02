@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,10 +31,9 @@ private   IQuestionnaireService iQuestionnaireService;
    private ISurveyService iSurveyService;
 
 @GetMapping("selectAll")
-@ApiOperation(value = "查询相关的课调信息")
+@ApiOperation(value = "显示相关的课调信息")
     public Message selectAll() {
-
-        List<SurveyEX> surveyEXES =surveyMonitorService.selectAll();
+    List<SurveyEX> surveyEXES =surveyMonitorService.selectAll();
         return MessageUtil.success(surveyEXES);
 
     }
@@ -50,13 +52,12 @@ public Message changeStatusOn(int id){
         return MessageUtil.success("操作成功");
     }
     @GetMapping("/FindByCondition")
-    @ApiOperation(value = "根据条件查询课调信息")
+    @ApiOperation(value = "根据问卷名称查询课调信息")
     public Message FindByCondition(String key) {
-        List<Questionnaire> l=iQuestionnaireService.selectByName(key);
 
-        List<SurveyEX> list=iSurveyService.FindByCondition(l);
-        System.out.println(123);
-        System.out.println(list);
+        List<Questionnaire> l=iQuestionnaireService.selectByName(key);
+        List<SurveyEX> list=surveyMonitorService.FindByCondition(l);
+
         return MessageUtil.success(list);
 
     }
