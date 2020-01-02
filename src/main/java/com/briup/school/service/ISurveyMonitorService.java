@@ -8,8 +8,8 @@ import java.util.List;
 public interface ISurveyMonitorService {
 
 List<SurveyEX> selectAll();
-   String changeStatusOn(int id) throws RuntimeException ;
-    String changeStatusOff(int id);
+   void changeStatusOn(int id) throws RuntimeException ;
+    void changeStatusOff(int id);
     List<SurveyEX> FindByCondition(List<Questionnaire> list);
 
 }
