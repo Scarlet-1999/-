@@ -31,7 +31,7 @@ private   IQuestionnaireService iQuestionnaireService;
    private ISurveyService iSurveyService;
 
 @GetMapping("selectAll")
-@ApiOperation(value = "查询相关的课调信息")
+@ApiOperation(value = "显示相关的课调信息")
     public Message selectAll() {
     List<SurveyEX> surveyEXES =surveyMonitorService.selectAll();
         return MessageUtil.success(surveyEXES);
@@ -52,7 +52,7 @@ public Message changeStatusOn(int id){
         return MessageUtil.success("操作成功");
     }
     @GetMapping("/FindByCondition")
-    @ApiOperation(value = "根据条件查询课调信息")
+    @ApiOperation(value = "根据问卷名称查询课调信息")
     public Message FindByCondition(String key) {
 
         List<Questionnaire> l=iQuestionnaireService.selectByName(key);
