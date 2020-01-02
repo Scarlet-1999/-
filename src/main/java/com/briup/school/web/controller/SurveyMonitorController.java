@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,8 +33,7 @@ private   IQuestionnaireService iQuestionnaireService;
 @GetMapping("selectAll")
 @ApiOperation(value = "查询相关的课调信息")
     public Message selectAll() {
-
-        List<SurveyEX> surveyEXES =surveyMonitorService.selectAll();
+    List<SurveyEX> surveyEXES =surveyMonitorService.selectAll();
         return MessageUtil.success(surveyEXES);
 
     }

@@ -10,6 +10,7 @@ import com.briup.school.service.IAllSurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +27,14 @@ public class AllSurveyServiceImpl implements IAllSurveyService {
 
     @Override
     public List<SurveyEX> findall() {
-        List<SurveyEX> list=allSurveyEXMapper.FindAll();
+        List<SurveyEX> listall=allSurveyEXMapper.FindAll();
+
+        List<SurveyEX> list=new ArrayList<>();
+        for (SurveyEX surveyEX:listall){
+            if (surveyEX.getStatus().equals("审核通过")){
+                list.add(surveyEX);
+            }
+        }
         return list;
     }
 
@@ -62,7 +70,13 @@ public class AllSurveyServiceImpl implements IAllSurveyService {
 
         word="%"+word+"%";
         //System.out.println(word);
-        List<SurveyEX> list=allSurveyEXMapper.findByAll(Dname,Clname,Coname,Qname,word);
+        List<SurveyEX> listall=allSurveyEXMapper.findByAll(Dname,Clname,Coname,Qname,word);
+        List<SurveyEX> list=new ArrayList<>();
+        for (SurveyEX surveyEX:listall){
+            if (surveyEX.getStatus().equals("审核通过")){
+                list.add(surveyEX);
+            }
+        }
 
         return list;
     }
@@ -70,15 +84,20 @@ public class AllSurveyServiceImpl implements IAllSurveyService {
     @Override
     public SurveyEX seeById(int id) throws RuntimeException {
         String statu = surveyMapper.selectByPrimaryKey(id).getStatus();
+        if (statu.equals("审核通过")){
+            //查询答案列表并赋值给查询到的surveyEX的answers
+            AnswerExample answerExample = new AnswerExample();
+            answerExample.createCriteria().andSurveyIdEqualTo(id);
+            SurveyEX surveyEX = surveyEXMapper.FindById(id);
+            surveyEX.setAnswers(answerMapper.selectByExample(answerExample));
 
-        //查询答案列表并赋值给查询到的surveyEX的answers
-        AnswerExample answerExample = new AnswerExample();
-        answerExample.createCriteria().andSurveyIdEqualTo(id);
-        SurveyEX surveyEX = surveyEXMapper.FindById(id);
-        surveyEX.setAnswers(answerMapper.selectByExample(answerExample));
+            //展示包括平均分及问题列表的界面
+            return surveyEX;
+        }else {
 
-        //展示包括平均分及问题列表的界面
-        return surveyEX;
+            return null;
+        }
+
 
 
 

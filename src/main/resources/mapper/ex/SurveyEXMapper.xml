@@ -7,6 +7,7 @@
         <result column="code" property="code"></result>
         <result column="average" property="average"></result>
         <result column="surveyday" property="surveyday"></result>
+        <result column="average" property="average"></result>
         <association property="department" column="department_id" select="selectDepart"></association>
         <association property="course" column="course_id" select="selectCourse"></association>
         <association property="aClass" column="clazz_id" select="selectClass"></association>
@@ -17,6 +18,11 @@
     <select id="FindAll" resultMap="abn">
         select *from briup_survey
     </select>
+
+    <select id ="lhjFindAll" resultMap="abn">
+         select *from briup_survey where status='开启'or status='未开启'
+    </select>
+
     <select id="selectDepart" resultType="com.briup.school.bean.Department">
         select name from briup_department where id=#{id}
     </select>
