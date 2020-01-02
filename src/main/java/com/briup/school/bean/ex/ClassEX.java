@@ -6,9 +6,18 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ClassEX implements Serializable {
-    private Integer id;
+
 
     private String name;
+    private  String average;
+
+    public String getAverage() {
+        return average;
+    }
+
+    public void setAverage(String average) {
+        this.average = average;
+    }
 
    /* private Integer serveNumber;
 
@@ -20,15 +29,9 @@ public class ClassEX implements Serializable {
 
     private String description;*/
 
-    private List<Survey> survry;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
 
     public String getName() {
         return name;
@@ -78,11 +81,5 @@ public class ClassEX implements Serializable {
         this.description = description;
     }
 */
-    public List<Survey> getSurvry() {
-        return survry;
-    }
 
-    public void setSurvry(List<Survey> survry) {
-        this.survry = survry;
-    }
 }
