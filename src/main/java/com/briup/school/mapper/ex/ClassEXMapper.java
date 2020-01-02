@@ -10,5 +10,5 @@ List<ClassEX> selectAll() throws  RuntimeException;
 List<ClassEX> select(int id) throws  RuntimeException;
 List<ClassEX> selectByName(String name) throws RuntimeException;
 List<ClassEX> selectAverage() throws  RuntimeException;
-    List<ClassEX> selectNameAndAverage(String name) throws  RuntimeException;
+    List<ClassEX> selectNameAndAverage() throws  RuntimeException;
 }

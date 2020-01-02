@@ -12,5 +12,5 @@ public interface IClassAnalysisService {
     Survey selectById1(int id) throws  RuntimeException;
     List<ClassEX> selectByName(String name) throws  RuntimeException;
     List<ClassEX> selectAverage() throws  RuntimeException;
-    List<ClassEX> selectNameAndAverage(String name) throws  RuntimeException;
+    List<ClassEX> selectNameAndAverage() throws  RuntimeException;
 }

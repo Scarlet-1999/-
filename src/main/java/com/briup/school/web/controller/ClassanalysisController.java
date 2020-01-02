@@ -43,7 +43,7 @@ public class ClassanalysisController {
 
     }
     @GetMapping("全部查询")
-    public  Message  selectNameAndAverage(String name) {
-        return MessageUtil.success(classAnalysisService.selectNameAndAverage(name));
+    public  Message  selectNameAndAverage() {
+        return MessageUtil.success(classAnalysisService.selectNameAndAverage());
     }
 }

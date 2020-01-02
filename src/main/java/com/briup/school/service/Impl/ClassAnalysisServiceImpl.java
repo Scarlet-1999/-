@@ -53,8 +53,8 @@ public class ClassAnalysisServiceImpl implements IClassAnalysisService {
     }
 
     @Override
-    public List<ClassEX> selectNameAndAverage(String name) throws RuntimeException {
-        return classEXMapper.selectNameAndAverage(name);
+    public List<ClassEX> selectNameAndAverage() throws RuntimeException {
+        return classEXMapper.selectNameAndAverage();
     }
 
 
