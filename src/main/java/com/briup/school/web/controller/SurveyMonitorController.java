@@ -54,11 +54,10 @@ public Message changeStatusOn(int id){
     @GetMapping("/FindByCondition")
     @ApiOperation(value = "根据条件查询课调信息")
     public Message FindByCondition(String key) {
-        List<Questionnaire> l=iQuestionnaireService.selectByName(key);
 
-        List<SurveyEX> list=iSurveyService.FindByCondition(l);
-        System.out.println(123);
-        System.out.println(list);
+        List<Questionnaire> l=iQuestionnaireService.selectByName(key);
+        List<SurveyEX> list=surveyMonitorService.FindByCondition(l);
+
         return MessageUtil.success(list);
 
     }

@@ -68,7 +68,7 @@ public class SurveyMonitorServiceImpl implements ISurveyMonitorService {
     public List<SurveyEX> FindByCondition(List<Questionnaire> list) throws RuntimeException {
         List<SurveyEX> l = new ArrayList<SurveyEX>();
         for(Questionnaire q:list){
-            l.addAll(surveyEXMapper.FindByCondition(q.getId()));
+            l.addAll(surveyEXMapper.lhjFindByCondition(q.getId()));
         }
         return l;
 

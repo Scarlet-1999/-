@@ -19,9 +19,18 @@
         select *from briup_survey
     </select>
 
+
+
+
+    <select id="lhjFindByCondition"   resultMap="abn">
+  select * from briup_survey where (status='开启'or status='未开启')and questionnaire_id = #{id}
+ </select>
+
     <select id ="lhjFindAll" resultMap="abn">
          select *from briup_survey where status='开启'or status='未开启'
     </select>
+
+
 
     <select id="selectDepart" resultType="com.briup.school.bean.Department">
         select name from briup_department where id=#{id}

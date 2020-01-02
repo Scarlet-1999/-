@@ -11,6 +11,7 @@ public interface SurveyEXMapper {
     List<SurveyEX> FindByCondition(int id);
     SurveyEX FindById(int id);
    List<SurveyEX> lhjFindAll();
+    List<SurveyEX>  lhjFindByCondition(int id);
 
 
 }
