@@ -2,9 +2,10 @@ package com.briup.school.bean.ex;
 
 import com.briup.school.bean.Survey;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ClassEX {
+public class ClassEX implements Serializable {
     private Integer id;
 
     private String name;

@@ -15,7 +15,7 @@
     </resultMap>
 
     <select id="FindAll" resultMap="abn">
-        select *from briup_survey
+        select *  from briup_survey
     </select>
     <select id="selectDepart" resultType="com.briup.school.bean.Department">
         select name from briup_department where id=#{id}

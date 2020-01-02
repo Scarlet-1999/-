@@ -29,7 +29,6 @@
       select  briup_clazz.id , briup_survey.average
       from briup_clazz,briup_survey
       where briup_clazz.id=briup_survey.clazz_id
-
     </select>
 </mapper>
 
