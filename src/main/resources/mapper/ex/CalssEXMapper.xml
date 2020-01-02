@@ -26,7 +26,8 @@
         select  * from  briup_survey where  id =#{clazz_id}
     </select>
     <select id="selectNameAndAverage" resultType="com.briup.school.bean.ex.ClassEX">
-      select  briup_clazz.id ,briup_survey.average from briup_clazz ,briup_survey
+      select  briup_clazz.id ,briup_survey.average
+      from briup_clazz ,briup_survey
       where briup_clazz.id=briup_survey.clazz_id
 
     </select>

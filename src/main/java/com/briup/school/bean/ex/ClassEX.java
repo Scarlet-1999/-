@@ -9,7 +9,7 @@ public class ClassEX {
 
     private String name;
 
-    private Integer serveNumber;
+   /* private Integer serveNumber;
 
     private Integer studentNumber;
 
@@ -17,7 +17,7 @@ public class ClassEX {
 
     private Integer teacherId;
 
-    private String description;
+    private String description;*/
 
     private List<Survey> survry;
 
@@ -37,7 +37,7 @@ public class ClassEX {
         this.name = name;
     }
 
-    public Integer getServeNumber() {
+   /* public Integer getServeNumber() {
         return serveNumber;
     }
 
@@ -76,7 +76,7 @@ public class ClassEX {
     public void setDescription(String description) {
         this.description = description;
     }
-
+*/
     public List<Survey> getSurvry() {
         return survry;
     }
