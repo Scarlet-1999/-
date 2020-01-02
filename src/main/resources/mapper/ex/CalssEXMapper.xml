@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.school.mapper.ex.ClassEXMapper">
+<resultMap id="123" type="com.briup.school.bean.ex.ClassEX">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="serve_number" jdbcType="INTEGER" property="serveNumber" />
+    <result column="student_number" jdbcType="INTEGER" property="studentNumber" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <collection property="survey"
+                ofType="com.briup.school.bean.Survey" column="id"
+                select="selectAverage"></collection>
+</resultMap>
+    <select id="selectById" resultType="com.briup.school.bean.Class">
+        select * from  briup_clazz  where id=#{id}
+    </select>
+    <select id="selectAll" resultType="com.briup.school.bean.Class">
+        select * from  briup_clazz
+    </select>
+    <select id="selectByName" resultType="com.briup.school.bean.Class" >
+        select * from  briup_clazz where name =#{name}
+    </select>
+
+    <select id="selectAverage" resultType="com.briup.school.bean.Survey" >
+        select  * from  briup_survey where  id =#{clazz_id}
+    </select>
+    <select id="selectNameAndAverage" resultType="com.briup.school.bean.ex.ClassEX">
+      select  briup_clazz.id ,briup_survey.average from briup_clazz ,briup_survey
+      where briup_clazz.id=briup_survey.clazz_id
+
+    </select>
+</mapper>
+
+
