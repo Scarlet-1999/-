@@ -1,7 +1,11 @@
 package com.briup.school.service.Impl;
 
+import com.briup.school.bean.AnswerExample;
 import com.briup.school.bean.ex.SurveyEX;
+import com.briup.school.mapper.AnswerMapper;
+import com.briup.school.mapper.SurveyMapper;
 import com.briup.school.mapper.ex.AllSurveyEXMapper;
+import com.briup.school.mapper.ex.SurveyEXMapper;
 import com.briup.school.service.IAllSurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,12 @@ import java.util.List;
 public class AllSurveyServiceImpl implements IAllSurveyService {
     @Autowired
     private AllSurveyEXMapper allSurveyEXMapper;
+    @Autowired
+    private SurveyMapper surveyMapper;
+    @Autowired
+    private SurveyEXMapper surveyEXMapper;
+    @Autowired
+    private AnswerMapper answerMapper;
 
     @Override
     public List<SurveyEX> findall() {
@@ -55,5 +65,22 @@ public class AllSurveyServiceImpl implements IAllSurveyService {
         List<SurveyEX> list=allSurveyEXMapper.findByAll(Dname,Clname,Coname,Qname,word);
 
         return list;
+    }
+
+    @Override
+    public SurveyEX seeById(int id) throws RuntimeException {
+        String statu = surveyMapper.selectByPrimaryKey(id).getStatus();
+
+        //查询答案列表并赋值给查询到的surveyEX的answers
+        AnswerExample answerExample = new AnswerExample();
+        answerExample.createCriteria().andSurveyIdEqualTo(id);
+        SurveyEX surveyEX = surveyEXMapper.FindById(id);
+        surveyEX.setAnswers(answerMapper.selectByExample(answerExample));
+
+        //展示包括平均分及问题列表的界面
+        return surveyEX;
+
+
+
     }
 }

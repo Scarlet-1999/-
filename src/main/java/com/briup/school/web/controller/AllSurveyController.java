@@ -2,6 +2,7 @@ package com.briup.school.web.controller;
 
 import com.briup.school.bean.ex.SurveyEX;
 import com.briup.school.service.IAllSurveyService;
+import com.briup.school.service.ISurveyCheckService;
 import com.briup.school.util.Message;
 import com.briup.school.util.MessageUtil;
 import io.swagger.annotations.Api;
@@ -21,6 +22,9 @@ import java.util.List;
 public class AllSurveyController {
     @Autowired
     private IAllSurveyService allSurveyService;
+
+    @Autowired
+    private ISurveyCheckService surveyCheckService;
 
 
     @GetMapping("/findall")
@@ -51,6 +55,14 @@ public class AllSurveyController {
     public Message findByAll(String Dname,String Clname,String Coname,String Qname,String word){
         List<SurveyEX> list=allSurveyService.findByAll(Dname,Clname,Coname,Qname,word);
         return MessageUtil.success(list);
+    }
+
+
+
+    @GetMapping("/seeById")
+    @ApiOperation("预览")
+    public Message seeById(int id){
+        return MessageUtil.success(allSurveyService.seeById(id));
     }
 
 }
