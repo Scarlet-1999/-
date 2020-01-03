@@ -1,9 +1,7 @@
 package com.briup.school.service.Impl;
 
 import com.briup.school.bean.Survey;
-import com.briup.school.bean.SurveyExample;
 import com.briup.school.bean.ex.ClassEX;
-import com.briup.school.bean.ex.SurveyEX;
 import com.briup.school.mapper.SurveyMapper;
 import com.briup.school.mapper.ex.ClassEXMapper;
 import com.briup.school.service.IClassAnalysisService;
@@ -29,10 +27,9 @@ public class ClassAnalysisServiceImpl implements IClassAnalysisService {
     }
 
     @Override
-    public List<Survey> findAll() throws RuntimeException {
-       SurveyExample surveyExample=new SurveyExample();
-       List<Survey> surveys=surveyMapper.selectByExample(surveyExample);
-       return surveys;
+    public List<ClassEX> findAll() throws RuntimeException {
+        List<ClassEX> classEXES=classEXMapper.findAllSurvey();
+        return classEXES;
     }
 
     @Override
@@ -53,9 +50,56 @@ public class ClassAnalysisServiceImpl implements IClassAnalysisService {
     }
 
     @Override
-    public List<ClassEX> selectNameAndAverage(String name) throws RuntimeException {
-        return classEXMapper.selectNameAndAverage(name);
+    public List<ClassEX> selectNameAndAverage(String key1, String key2, String word) throws RuntimeException {
+        return classEXMapper.selectNameAndAverage(key1,key2,word);
     }
+
+    /*@Override
+    public List<ClassEX> fingword(String key1, String key2, String word) throws RuntimeException {
+        word = word == null ? "" : word;
+        key1 = key1 == null ? "" : key1;
+        key2 = key2 == null ? "" : key2;
+        if ((key1 == null || "".equals(key1)) &&(key2 == null || "".equals(key2))&& (word == null || "".equals(word))) {
+            System.out.println(".......");
+            return findAll();
+
+        }else if ((key1 == null || "".equals(key1)) && (key2 == null || "".equals(key2))&& !"".equals(word)){
+            //前面下拉框为空，后面不为空
+
+            word = "%" + word  + "%";
+            List<ClassEX> classEXES=classEXMapper.selectword(word);
+            return classEXES;
+
+        }else if(!"".equals(key1) && (key2 == null || "".equals(key2))&& !"".equals(word)){
+            word = "%" + word  + "%";
+            key1 = "%" + key1  + "%";
+            List<ClassEX> resultExes1=classEXMapper.selectdepartword(key1,word);
+            return resultExes1;
+
+        }else if(!"".equals(key2) && (key1 == null || "".equals(key1))&& !"".equals(word)){
+            word = "%" + word  + "%";
+            key2 = "%" + key2  + "%";
+            System.out.println(word);
+            List<ClassEX> resultExes2=classEXMapper.selectclassword(key2,word);
+            return resultExes2;
+        }else if(!"".equals(key1) && (key2 == null || "".equals(key2))&& (word == null || "".equals(word))){
+            key1 = "%" + key1  + "%";
+            List<ClassEX> resultExes3 = classEXMapper.selectdepart(key1);
+            return resultExes3;
+
+        }else if(!"".equals(key2) && (key1 == null || "".equals(key1))&& (word == null || "".equals(word))) {
+            key2 = "%" + key2  + "%";
+            List<ClassEX> resultExes4 = classEXMapper.selectclass(key2);
+            return resultExes4;
+
+        }else if(!"".equals(key1) && !"".equals(key2) && (word == null || "".equals(word))){
+            key1 = "%" + key1  + "%";
+            key2 = "%" + key2  + "%";
+            List<ClassEX> resultExes4 = classEXMapper.selectdepartclass(key1,key2);
+            return resultExes4;
+        }
+        return null;
+    }*/
 
 
 }
